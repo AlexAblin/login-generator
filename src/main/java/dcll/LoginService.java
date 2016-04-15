@@ -51,8 +51,7 @@ public class LoginService {
         for (String login: loginsExistants) {
             if (login.startsWith(pref)) {
                 loginsPrefixes.add(login);
-            }
-        }
+            }        }
         return  loginsPrefixes;
     }
 

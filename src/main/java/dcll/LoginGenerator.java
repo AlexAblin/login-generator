@@ -15,7 +15,7 @@ public class LoginGenerator {
 
     /**
      * Construit un login generator.
-     * @param loginService le service de login
+     * @param loginServiceParam le service de login
      */
     public LoginGenerator(final LoginService loginServiceParam) {
         this.loginService = loginServiceParam;
