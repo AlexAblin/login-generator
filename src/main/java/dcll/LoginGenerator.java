@@ -39,12 +39,19 @@ public class LoginGenerator {
      * @param prenom le prenom
      * @return le login genere
      */
-    public final String generateLoginForNomAndPrenom(final String nom,final String prenom) {
+    public final String generateLoginForNomAndPrenom(final String nom,
+                                                     final String prenom) {
+        String n;
         String p = deAccent(prenom.substring(0, 1).toUpperCase());
-        String n = deAccent(nom.substring(0, 3).toUpperCase());
-        String login = p+n ;
+        if (nom.length() < 3) {
+             n = deAccent(nom.toUpperCase());
+        } else {
+             n = deAccent(nom.substring(0, 3).toUpperCase());
+        }
+        String login = p + n;
         if (loginService.loginExists(login)) {
-            login = login + "1" ;
+            login = login + (loginService.findAllLoginsStartingWith(login)
+                    .size());
         }
         loginService.addLogin(login);
         return login;
@@ -57,7 +64,8 @@ public class LoginGenerator {
      * @return la chaine de caractere sans accents
      */
     private String deAccent(String str) {
-        String nfdNormalizedString = Normalizer.normalize(str, Normalizer.Form.NFD);
+        String nfdNormalizedString = Normalizer
+                .normalize(str, Normalizer.Form.NFD);
         Pattern pattern = Pattern.compile("\\p{InCombiningDiacriticalMarks}+");
         return pattern.matcher(nfdNormalizedString).replaceAll("");
     }

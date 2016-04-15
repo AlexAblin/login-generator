@@ -43,4 +43,22 @@ public class LoginGeneratorTest {
         assertTrue(loginService.findAllLogins().contains("PDUR"));
 
     }
+
+    @Test
+    public void testGenerateLoginForNomAndPrenom4() throws Exception {
+        String result=lg.generateLoginForNomAndPrenom("Du","Paul");
+        assertEquals(result,"PDU");
+        assertTrue(loginService.findAllLogins().contains("PDU"));
+
+    }
+
+    @Test
+    public void testGenerateLoginForNomAndPrenom5() throws Exception {
+        String result=lg.generateLoginForNomAndPrenom("Ralling","John");
+        assertEquals(result,"JRAL2");
+        assertTrue(loginService.findAllLogins().contains("JRAL2"));
+
+    }
+
+
 }
